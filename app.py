@@ -5,6 +5,9 @@ app = Flask(__name__)
 def index():
   return('<h1>THIS WORKS YO</h1>')
 
+if __name__ == '__main__':
+  app.run()
+
 '''
 from flask import Flask
 from flask import render_template
