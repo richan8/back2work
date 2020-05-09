@@ -1,0 +1,87 @@
+<html>
+<head>
+    <title>Reservations</title>
+    <script type="text/javascript" src="static/jquery.min.js"></script>
+    <script type="text/javascript" src="static/script.js"></script>
+    <script src="static/jquery.classyqr.min.js"></script>
+    <link rel="stylesheet" href="static/style.css"/>
+</head>
+<body>
+    <div class = "background"></div>
+    <div class = "error"></div>
+    <div class = "notification"></div>
+
+    <div class = "box login boxHiddenBottom">
+        <div class = "inputLabel">Number</div>
+        <input type = "number" class = "number"/>
+        <div class = "inputLabel">Password</div>
+        <input type = "password" class = "password">
+        <div class = "submitButton">Login</div>
+        <div class="signUpText">Don't have an account ? <div class="signUpButton gotoRegister">Sign Up</div></div>
+    </div>
+
+    <div class = "box register boxHiddenBottom">
+        <div class = "inputLabel">Name</div>
+        <input type = "text" class = "name"/>
+        <div class = "inputLabel">Number</div>
+        <input type = "number" class = "number"/>
+        <div class = "inputLabel">Password</div>
+        <input type = "password" class = "password">
+        <div class = "submitButton">Register</div>
+        <div class="signUpText">Already have an account ?<div class="signUpButton gotoLogin">Login</div></div>
+    </div>
+
+    <div class = "screen homeScreen screenHidden">
+        <!--
+        <div class = "screenHeader">ACCEPTED BOOKINGS</div>
+        
+        <div id ="booking1" class = "booking">
+            <div class = "bookingData bookingDate">DATE</div>
+            <div class = "bookingData bookingLocation">LOCATION</div>
+            <div class = "bookingData bookingGroupSize">13</div>
+            <div class = "bookingData bookingEntryTime">TIME ENTRY</div>
+            <div class = "bookingData bookingExitTime">TIME EXIT</div>
+        </div>
+        <div class = "screenHeader">REJECTED BOOKINGS</div>
+        <div id ="booking4" class = "booking">
+            <div class = "bookingData bookingDate">DATE</div>
+            <div class = "bookingData bookingLocation">LOCATION</div>
+            <div class = "bookingData bookingGroupSize">13</div>
+            <div class = "bookingData bookingEntryTime">TIME ENTRY</div>
+            <div class = "bookingData bookingExitTime">TIME EXIT</div>
+        </div>
+        -->
+    </div>
+    <div class = "bottomButton newBooking bottomButtonHidden">New Booking</div>
+
+
+    <div class = "screen locationsScreen screenHidden">
+        <img class = "map mapElementHidden" src="static/midtownManhattan.png"/>
+        <div class = "zone mapElementHidden" id ="zone161_1">161</div>
+        <div class = "zone mapElementHidden" id ="zone162_1">162</div>
+        <div class = "zone mapElementHidden" id ="zone163_1">163</div>
+        <div class = "zone mapElementHidden" id ="zone163_2">163</div>
+        <div class = "zone mapElementHidden" id ="zone164_1">164</div>
+        <div class = "zone mapElementHidden" id ="zone164_2">164</div>
+        <div class="zoneCursor mapElementHidden cursorHidden" id="cursor"><div class = "label"></div></div>
+    </div>
+    <div class = "bottomButton selectDestination bottomButtonHidden">Select Destination</div>
+
+    <div class = "screen timeScreen screenHidden">
+        <div class = "inputLabel">Date</div>
+        <input type = "date" class = "date"/>
+        <div class = "inputLabel">Entry Time</div>
+        <input type = "time" class = "entryTime"/>
+        <div class = "inputLabel">Exit Time</div>
+        <input type = "time" class = "exitTime"/>
+        <div class = "inputLabel">Group Size</div>
+        <input type = "number" class = "groupSize"/>
+    </div>
+    <div class = "bottomButton requestBooking bottomButtonHidden">Request Booking</div>
+
+    <div class = "QRCurtain"></div>
+    <div class = "QRCode"><img id = "qrcode"/></div>
+    <div class = "QRClose">X</div>
+
+</body>
+</html>

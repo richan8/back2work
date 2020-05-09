@@ -1,0 +1,392 @@
+body{
+    background: #2c2340;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0px;
+}
+.background{
+    position: fixed;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(sampleBackground.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.box {
+    width: 90%;
+    background-color: rgba(0,0,0,0);
+    position: fixed;
+    left: 50%;
+    bottom: 4%;
+    transform: translateX(-50%) translateY(0%);
+    transition: all 1s ease-in-out;
+}
+.boxHiddenBottom{
+    bottom: -100%;
+}
+.box *{
+    width: 95%;
+    display: block;
+    margin: auto;
+}
+.box .header{
+    font-size: 40px;
+}
+input {
+    border: none;
+    background: none;
+    margin-top: 10px !important;
+    border-bottom: #66e0e0 3px solid;
+    margin-bottom: 10px !important;
+    font-size: 88px;
+    color: #fafafa;
+}
+input:focus {
+    outline: none;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.box .inputLabel {
+    margin-top: 55px;
+    margin-bottom: 0px;
+    font-size: 40px;
+    color: #66e0e0;
+}
+.submitButton {
+    background-color: #22a0a0;
+    margin-top: 60px;
+    font-size: 60px;
+    text-align: center;
+    color: white;
+    line-height: 150px;
+    box-shadow: 8px 8px 10px 10px rgba(30,30,30,0.4);
+}
+.signUpText {
+    margin-top: 30px;
+    color: #fafafa;
+    font-size: 38px;
+    display: block;
+    text-align: center;
+}
+.signUpText .signUpButton {
+    color: #fafafa;
+    font-weight: bold;
+}
+.error{
+    width: 70%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: #cd2460;
+    font-size: 40px;
+    position: fixed;
+    left: 50%;
+    top: -20%;
+    transform: translateX(-50%) translateY(0%);
+    transition: all 0.3s ease-in-out;
+    color: #fafafa;
+    padding: 30px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 4px 4px 10px 10px rgba(0,0,0,0.08);
+    z-index: 999;
+}
+.notification{
+    width: 70%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: #3390a0;
+    font-size: 40px;
+    position: fixed;
+    left: 50%;
+    top: -10%;
+    transform: translateX(-50%) translateY(0%);
+    transition: all 0.3s ease-in-out;
+    color: #fafafa;
+    padding: 30px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 4px 4px 10px 10px rgba(0,0,0,0.08);
+    z-index: 998;
+}
+.errorShow{
+    top: 4%;
+}
+.notificationShow{
+    top: 4%;
+}
+.screen{
+    overflow-y: scroll;
+    text-align: center;
+    width: 98%;
+    left: 1%;
+    height: 85vh;
+    position: fixed;
+    transition: all 1s ease-in-out;
+}
+.screenHidden{
+    left: -100%;
+}
+.bottomButton{
+    background-color: #22a0a0;
+    color: #fafafa;
+    font-size: 60px;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    line-height: 15vh;
+    box-shadow: 2px 2px 15px 15px rgba(0,0,0,0.15);
+    transition: all 0.3s ease-in-out;
+}
+.bottomButtonHidden{
+    bottom: -30vh;
+}
+.locationsScreen{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+/*
+.location{
+    width: 250px;
+    height: 250px;
+    margin: 0px 10px 10px 0px;
+    background-color: rgba(255,255,255,0.3);
+    display: inline-block;
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
+    line-height: 250px;
+    transition: all 0.3s ease-in-out;
+}
+*/
+
+img.map {
+    width: 99%;
+    /* height: 100%; */
+    position: fixed;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.4);
+    transition: all 0.3s ease-in-out;
+}
+
+.zone {
+    overflow: hidden;
+    min-width: 0;
+    min-height: 0;
+    z-index: 999;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease-in-out;
+    background: rgba(0,0,0,0);
+}
+#zone161_1 {
+    width: 15vw;
+    height: 26.2vw;
+    transform: translate(53%, -102%) rotate(29deg);
+}
+#zone162_1 {
+    width: 7.6vw;
+    height: 32.4vw;
+    transform: translate(295%, -84%) rotate(29deg);
+}
+#zone163_1 {
+    width: 28vw;
+    height: 6.2vw;
+    transform: translate(14%, -542%) rotate(30deg);
+}
+#zone163_2 {
+    width: 13vw;
+    height: 6.2vw;
+    transform: translate(20%, -538%) rotate(30deg);
+}
+#zone164_1 {
+    width: 7.6vw;
+    height: 26vw;
+    transform: translate(-53%, -22%) rotate(29deg);
+}
+div#zone164_2 {
+    width: 7.6vw;
+    height: 13.3vw;
+    transform: translate(-10%, 73%) rotate(29deg);
+}
+
+.zoneCursor {
+    opacity: 1;
+    pointer-events: none;
+    width: 10px;
+    height: 10px;
+    border: solid 15px #C05050;
+    border-radius: 100%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    overflow: visible;
+    transition: all 0.3s ease-in-out;
+    left: 50%;
+    top: 50%;
+}
+
+.cursorHidden{
+    pointer-events: none;
+    opacity: 0;
+}
+
+.locationsScreen .zoneCursor .label {
+    font-size: 30px;
+    background: rgba(0,0,0,0.55);
+    padding: 10px 10px 10px 10px;
+    overflow: hidden;
+    display: inline-block;
+    min-width: 350px;
+    color: #fafafa;
+    border-radius: 30px;
+    transform: translate(-50%, 30px);
+}
+
+.mapElementHidden{
+    left: -110% !important;
+}
+
+.selected{
+    background-color: #22a0a0;
+}
+
+.screen .inputlabel{
+    font-size: 50px;
+    color: #33d0d0;
+    text-align: left;
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.screen input{
+    width: 80%;
+    margin: auto;
+    margin-bottom: 50px !important;
+}
+
+.screen.timeScreen{
+    padding-top: 100px;
+}
+
+.screen .screenHeader {
+    font-size: 80px;
+    color: #fafafa;
+    background-color: rgba(0,0,0,0.4);
+    text-align: left;
+    /* padding-left: 20px; */
+    text-align: center;
+    padding: 30px 0px 30px 0px;
+    margin-top: 20px;
+}
+
+.homeScreen .booking {
+    margin: 20px 0px 0px 0px;
+    background-color: rgba(0,0,0,0.3);
+    color: #fafafa;
+    font-size: 40px;
+    padding-bottom: 20px;
+}
+.bookingData {
+    display: inline-block;
+}
+.bookingData.bookingDate{
+    width: 100%;
+    border-bottom: 2px solid rgba(255,255,255,0.8);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    font-size: 60px;
+}
+.bookingData.bookingLocation {
+    width: 80%;
+    text-align: left;
+    font-size: 50px;
+    padding-bottom: 10px;
+}
+.bookingData.bookingGroupSize {
+    width: 10%;
+    border-left: 2px solid rgba(255,255,255,0.8);
+    font-size: 50px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+.bookingData.bookingEntryTime {
+    width: 40%;
+    text-align: right;
+    margin-right: 20px;
+}
+.bookingData.bookingExitTime {
+    width: 40%;
+    border-left: 2px solid rgba(255,255,255,0.8);
+    text-align: left;
+    text-indent: 25px;
+}
+.QRCode {
+    position: fixed;
+    top: -100%;
+    transform: translate(-50%, -50%);
+    z-index: 996;
+    box-shadow: 5px 10px 10px rgba(0,0,0,0.5);
+    width: 90vw;
+    height: 90vw;
+    transition: all 0.3s ease-in-out;
+    background-color: white;
+    left: 50%;
+    box-shadow: 12px 12px 15px 15px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+#qrcode {
+    width: 116%;
+    height: 116%;
+    margin-left: -8%;
+    margin-top: -8%;
+}
+.QRCodeShow{
+    top:50%;
+}
+.QRClose {
+    position: fixed;
+    bottom: -100%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 995;
+    background-color: #a92030;
+    color: #fafafa;
+    box-shadow: 5px 10px 10px rgba(0,0,0,0.5);
+    width: 20vw;
+    height: 20vw;
+    font-size: 14vw;
+    border-radius: 10vw;
+    transition: all 0.5s ease-in-out;
+    text-align: center;
+}
+.QRCloseShow{
+    bottom:-5vw;
+}
+
+.QRCurtain {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background-color: rgba(0,0,0,0.8);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s ease-in-out;
+}
+.QRCurtainShow {
+    pointer-events: all;
+    opacity: 1;
+}
