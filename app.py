@@ -1,13 +1,3 @@
-
-from flask import Flask
-app = Flask(__name__)
-@app.route('/')
-def index():
-  return('<h1>THIS WORKS YO</h1>')
-
-if __name__ == '__main__':
-  app.run()
-
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -153,3 +143,6 @@ def booking():
 
     return(responseStr)
   return('{"error": "The user phone number does not exist in our database."}')
+
+if __name__ == '__main__':
+  app.run()
