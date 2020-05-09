@@ -16,9 +16,9 @@ app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 
 #FOR LOCAL
-MONGO_URL = os.environ.get('MONGO_URL')
-if(not MONGO_URL):
-  MONGO_URL = "mongodb://localhost:27017/rest";
+#MONGO_URL = os.environ.get('MONGO_URL')
+#if(not MONGO_URL):
+#  MONGO_URL = "mongodb://localhost:27017/rest";
 
 #FOR HEROKU
 MONGO_URL = 'mongodb://user:password1234@ds139920.mlab.com:39920/heroku_1d254xtv?retryWrites=false'
