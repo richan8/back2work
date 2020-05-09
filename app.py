@@ -25,7 +25,7 @@ MONGO_URL = 'mongodb://user:password1234@ds139920.mlab.com:39920/heroku_1d254xtv
 app.config['MONGO_URI'] = MONGO_URL
 mongoClient = pymongo.MongoClient(MONGO_URL)
 
-db = mongoClient['databaseUno']
+db = mongoClient['heroku_1d254xtv']
 users = db['users']
 confimationCodes = db['confimationCodes']
 
