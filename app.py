@@ -16,9 +16,9 @@ app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 
 #FOR LOCAL
-#MONGO_URL = os.environ.get('MONGO_URL')
-#if(not MONGO_URL):
-#  MONGO_URL = "mongodb://localhost:27017/rest";
+MONGO_URL = os.environ.get('MONGO_URL')
+if(not MONGO_URL):
+  MONGO_URL = "mongodb://localhost:27017/rest";
 
 #FOR HEROKU
 MONGO_URL = 'mongodb://user:password1234@ds139920.mlab.com:39920/heroku_1d254xtv?retryWrites=false'
@@ -67,17 +67,8 @@ def start():
 @app.route('/login', methods = ['POST'])
 def login():
   number = request.form['number']
-  password = request.form['password'] 
-  #print('Number: ', number)
-  #print('Password: ', password)
-
-  #print('DATABASE:')
-  #for user in users.find():
-  #    print(user['name'], user['number'], user['password'])
-
+  password = request.form['password']
   for user in users.find({'number': number, 'password': password}):
-    #print('USER FOUND: ', end='')
-    #print(user)
     response = {"error":"False"}
     response['data'] = {}
     response['data']['name'] = user['name']
@@ -93,15 +84,21 @@ def register():
   name = request.form['name']
   number = request.form['number']
   password = request.form['password']
-  history = {} #EXTRA - WE CAN STORE HISTORY OF REQUESTS AND DECISIONS FOR EACH PERSON
+  history = {} #EXTRA - WE STORE THE HISTORY OF REQUESTS AND DECISIONS FOR EACH PERSON
   userData = {'name': name, 'number':number, 'password':password, 'history':history}
-  users.insert_one(userData)
-  print('REGISTERED NEW USER')
-  #print('DATABASE:')
-  #for user in users.find():
-  #    print(user['name'], user['number'], user['password'])
 
-  return('{"error":"False"}')
+  users.insert_one(userData)
+  
+  for user in users.find({'number': number, 'password': password}):
+    response = {"error":"False"}
+    response['data'] = {}
+    response['data']['name'] = user['name']
+    response['data']['number'] = user['number']
+    response['data']['history'] = user['history']
+    responseStr = json.dumps(response)
+    return(responseStr)
+
+  return('{"error": "The credentials are incorrect"}')
 
 @app.route('/booking', methods = ['POST'])
 def booking():
