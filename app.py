@@ -8,7 +8,6 @@ def index():
 if __name__ == '__main__':
   app.run()
 
-'''
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -24,13 +23,13 @@ mongoClient = pymongo.MongoClient("mongodb://localhost:27017/")
 db = mongoClient['databaseUno']
 users = db['users']
 confimationCodes = db['confimationCodes']
-'''
+
 '''
 CMD: 
   > set FLASK_APP = app.py
   > python -m flask run
 '''
-'''
+
 def decisionAlgorithm(location, date, entryTime, exitTime, groupSize):
   print('Params: %s, %s, %s, %s, %s'%(location, date, entryTime, exitTime, groupSize))
   return(random.uniform(0,1) > 0.5)
@@ -154,4 +153,3 @@ def booking():
 
     return(responseStr)
   return('{"error": "The user phone number does not exist in our database."}')
-'''
