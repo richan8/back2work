@@ -5,10 +5,22 @@ import pymongo
 import json
 import string
 from bson import ObjectId
-import random #ONLY USED FOR PLACEHOLDER DECISION ALGORITHM
+import random
 
+#LOGGING
+import os
+import sys
+import logging
 app = Flask(__name__)
-mongoClient = pymongo.MongoClient("mongodb://localhost:27017/")
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
+
+MONGO_URL = os.environ.get('MONGO_URL')
+if not MONGO_URL:
+    MONGO_URL = "mongodb://localhost:27017/rest";
+app.config['MONGO_URI'] = MONGO_URL
+
+mongoClient = pymongo.MongoClient(MONGO_URL)
 
 db = mongoClient['databaseUno']
 users = db['users']
