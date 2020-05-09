@@ -15,9 +15,14 @@ app = Flask(__name__)
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 
-MONGO_URL = os.environ.get('MONGO_URL')
-if not MONGO_URL:
-    MONGO_URL = "mongodb://localhost:27017/rest";
+#FOR LOCAL
+#MONGO_URL = os.environ.get('MONGO_URL')
+#if(not MONGO_URL):
+#  MONGO_URL = "mongodb://localhost:27017/rest";
+
+#FOR HEROKU
+MONGO_URL = 'MONGOmongodb://user:password1234@ds139920.mlab.com:39920/heroku_1d254xtv'
+
 app.config['MONGO_URI'] = MONGO_URL
 
 mongoClient = pymongo.MongoClient(MONGO_URL)
