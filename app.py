@@ -33,7 +33,9 @@ db = mongoClient['heroku_1d254xtv']
 users = db['users']
 confimationCodes = db['confimationCodes']
 
-#READING THE CSVs
+#READING THE PREPROCESSED CSVs
+#we use skip to reduce the server load due to the restrictions on file size on heroku and github.
+#However we have used the entire data set in our colab notebook to run the algorithm.
 skip = 50 #DEFINED FOR OPTI FILES
 print('Reading CSV for 2017')
 df_2017 = pd.read_csv('data/2017opti.csv')
@@ -57,7 +59,11 @@ CMD:
   > set FLASK_APP = app.py
   > python -m flask run
 '''
-
+# We calculate the total no.of people present at the requested location in the same time duration in the previous three years.
+# **Calculate the mean over the three years and divide it by 3 to follow the guidelines provided by CDC of maintaining a workforce of 33% in public places** 
+# This would be the threshold of that location for the current datetime.
+# If the current population of the location retrived from the database +the number of people in the request exceeds the threshold we would deny the request 
+# Else we will allow the user to enter the location by sending a QR code to the user. Update the current population.
 def decisionAlgorithm(location, date, entryTime, exitTime, groupSize):
   print('Decision Params: %s, %s, %s, %s, %s'%(location, date, entryTime, exitTime, groupSize))
   sTime = date + ' ' + entryTime + ':00'
@@ -110,6 +116,7 @@ def decisionAlgorithm(location, date, entryTime, exitTime, groupSize):
   decision = threshold >= bookingCount + int(groupSize)
   return(decision)
 
+#Return confirmation message to the user
 def generateConfirmation():
   chars = string.ascii_letters + string.digits
   while(True):
