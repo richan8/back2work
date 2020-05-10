@@ -8,16 +8,16 @@
 </head>
 <body>
     <div class = "background"></div>
-    <div class = "error"></div>
-    <div class = "notification"></div>
+    <div class = "error tappable"></div>
+    <div class = "notification tappable"></div>
 
     <div class = "box login boxHiddenBottom">
         <div class = "inputLabel">Number</div>
         <input type = "number" class = "number"/>
         <div class = "inputLabel">Password</div>
         <input type = "password" class = "password">
-        <div class = "submitButton">Login</div>
-        <div class="signUpText">Don't have an account ? <div class="signUpButton gotoRegister">Sign Up</div></div>
+        <div class = "submitButton tappable">Login</div>
+        <div class="signUpText">Don't have an account ? <div class="signUpButton tappable gotoRegister">Sign Up</div></div>
     </div>
 
     <div class = "box register boxHiddenBottom">
@@ -27,8 +27,8 @@
         <input type = "number" class = "number"/>
         <div class = "inputLabel">Password</div>
         <input type = "password" class = "password">
-        <div class = "submitButton">Register</div>
-        <div class="signUpText">Already have an account ?<div class="signUpButton gotoLogin">Login</div></div>
+        <div class = "submitButton tappable">Register</div>
+        <div class="signUpText">Already have an account ?<div class="signUpButton tappable gotoLogin">Login</div></div>
     </div>
 
     <div class = "screen homeScreen screenHidden">
@@ -52,7 +52,7 @@
         </div>
         -->
     </div>
-    <div class = "bottomButton newBooking bottomButtonHidden">New Booking</div>
+    <div class = "bottomButton newBooking bottomButtonHidden tappable">New Booking</div>
 
 
     <div class = "screen locationsScreen screenHidden">
@@ -65,7 +65,7 @@
         <div class = "zone mapElementHidden" id ="zone164_2">164</div>
         <div class="zoneCursor mapElementHidden cursorHidden" id="cursor"><div class = "label"></div></div>
     </div>
-    <div class = "bottomButton selectDestination bottomButtonHidden">Select Destination</div>
+    <div class = "bottomButton selectDestination bottomButtonHidden tappable">Select Destination</div>
 
     <div class = "screen timeScreen screenHidden">
         <div class = "inputLabel">Date</div>
@@ -77,7 +77,7 @@
         <div class = "inputLabel">Group Size</div>
         <input type = "number" class = "groupSize"/>
     </div>
-    <div class = "bottomButton requestBooking bottomButtonHidden">Request Booking</div>
+    <div class = "bottomButton requestBooking bottomButtonHidden tappable">Request Booking</div>
 
     <div class = "QRCurtain"></div>
     <div class = "QRCode"><img id = "qrcode"/></div>

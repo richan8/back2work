@@ -390,3 +390,13 @@ div#zone164_2 {
     pointer-events: all;
     opacity: 1;
 }
+.tappable{
+    opacity: 1;
+}
+.tappable:hover{
+    transition: all 0.03s ease-out;
+    opacity: 0.68;
+}
+.zone {
+    color: rgba(0,0,0,0);
+}

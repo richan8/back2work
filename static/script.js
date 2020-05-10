@@ -47,7 +47,7 @@ $(document).ready(function(){
                     loc = locationNames[loc];
                 }
                 temp = '';
-                temp += '<div id ="booking'+i.toString()+'" class = "booking">';
+                temp += '<div id ="booking'+i.toString()+'" class = "booking tappable">';
                 temp += '<div class = "bookingData bookingDate">'+booking['Date'].toString()+'</div>';
                 temp += '<div class = "bookingData bookingLocation">'+loc.toString()+'</div>';
                 temp += '<div class = "bookingData bookingGroupSize">'+booking['Group Size'].toString()+'</div>';
