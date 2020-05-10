@@ -15,12 +15,16 @@ app = Flask(__name__)
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 
-#FOR LOCAL
+#DATA MANIPULATION
+import pandas as pd
+from datetime import datetime
+
+#FOR LOCAL DB
 #MONGO_URL = os.environ.get('MONGO_URL')
 #if(not MONGO_URL):
 #  MONGO_URL = "mongodb://localhost:27017/rest";
 
-#FOR HEROKU
+#FOR HEROKU DB
 MONGO_URL = 'mongodb://user:password1234@ds139920.mlab.com:39920/heroku_1d254xtv?retryWrites=false'
 app.config['MONGO_URI'] = MONGO_URL
 mongoClient = pymongo.MongoClient(MONGO_URL)
@@ -29,6 +33,25 @@ db = mongoClient['heroku_1d254xtv']
 users = db['users']
 confimationCodes = db['confimationCodes']
 
+#READING THE CSVs
+skip = 50 #DEFINED FOR OPTI FILES
+print('Reading CSV for 2017')
+df_2017 = pd.read_csv('data/2017opti.csv')
+print('Reading CSV for 2018')
+df_2018 = pd.read_csv('data/2018opti.csv')
+print('Reading CSV for 2019')
+df_2019 = pd.read_csv('data/2019opti.csv')
+
+dataframe_dict = {2017:df_2017, 2018:df_2018, 2019:df_2019}
+#dataframe_dict = {2017: df_2017}
+
+df_grouped_dict = {}
+for year in dataframe_dict:
+  print('Processing Year: ', year)
+  df = dataframe_dict[year]
+  df_location_grouped = df.groupby(['DOLocationID', 'DateTime']).sum()
+  df_grouped_dict[year] = df_location_grouped
+
 '''
 CMD: 
   > set FLASK_APP = app.py
@@ -36,8 +59,56 @@ CMD:
 '''
 
 def decisionAlgorithm(location, date, entryTime, exitTime, groupSize):
-  print('Params: %s, %s, %s, %s, %s'%(location, date, entryTime, exitTime, groupSize))
-  return(random.uniform(0,1) > 0.5)
+  print('Decision Params: %s, %s, %s, %s, %s'%(location, date, entryTime, exitTime, groupSize))
+  sTime = date + ' ' + entryTime + ':00'
+  eTime = date + ' ' + exitTime + ':00'
+  s = datetime.strptime(sTime, '%Y-%m-%d %H:%M:%S')
+  e = datetime.strptime(eTime, '%Y-%m-%d %H:%M:%S')
+  now = datetime.now()
+  if(s > e or s < now):
+    print('Invalid time range given')
+    return(False)
+
+  bookingCount = 0
+  for user in users.find({}):
+    if('history' in user and 'bookings' in user['history']):
+      for booking in user['history']['bookings']:
+        t = booking['Date'] + ' ' + booking['Entry Time']
+        t = datetime.strptime(t, '%Y-%m-%d %H:%M')
+        if(t > s and t < e):
+          bookingCount += 1
+
+  new_df_list=pd.DataFrame()
+  total_count = 0
+  previous_year = -1
+
+  for year in df_grouped_dict:
+    df = df_grouped_dict[year]
+    df = df.reset_index()
+
+    df['DateTime'] = pd.to_datetime(df['DateTime'])
+    '''
+    if previous_year != -1:
+      sTime = sTime.replace(str(previous_year), str(year))
+      eTime = eTime.replace(str(previous_year), str(year))
+    '''
+    sTime = sTime.replace(str('2020'), str(year))
+    eTime = eTime.replace(str('2020'), str(year))
+
+    mask = (df['DateTime'] >= sTime) & (df['DateTime'] < eTime)
+    df = df.loc[mask]
+    new_df_list.append(df)
+    total_count = total_count+df.size
+    previous_year = year
+    
+  no_of_years = len(df_grouped_dict.keys())
+  mean_passenger_count = total_count/no_of_years
+  threshold = int(mean_passenger_count/3) * (skip)
+  print("threshhold is        --> "+str(threshold))
+  print("cout at location is  --> "+str(bookingCount))
+  
+  decision = threshold >= bookingCount + int(groupSize)
+  return(decision)
 
 def generateConfirmation():
   chars = string.ascii_letters + string.digits
@@ -109,8 +180,6 @@ def booking():
   exitTime = request.form['Exit Time']
   groupSize = request.form['Group Size']
   decision = decisionAlgorithm(location, date, entryTime, exitTime, groupSize)
-
-  print('THE DECISION IS: %s'%(decision))
 
   for user in users.find({'number': number}):
     #print('USER FOUND: ', end='')
